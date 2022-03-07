@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { createUser } from '../services/userAPI';
+import Header from '../components/Header';
 
 const MINLENGTH = 3;
 
@@ -44,6 +45,7 @@ class Login extends Component {
         loading ? <h2>Carregando...</h2>
           : (
             <div data-testid="page-login">
+              <Header />
               <form>
                 <input
                   type="text"
