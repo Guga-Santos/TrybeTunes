@@ -27,13 +27,9 @@ class App extends React.Component {
               <Favorites />
             </Route>
 
-            <Route path="/album/:id">
-              <Album />
-            </Route>
+            <Route path="/album/:id" render={ (props) => <Album { ...props } /> } />
 
-            <Route path="/search">
-              <Search />
-            </Route>
+            <Route path="/search" render={ (props) => <Search { ...props } /> } />
 
             <Route path="/" exact>
               <Login />

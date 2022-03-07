@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import Loading from '../components/Loading';
 
 class Search extends Component {
   constructor() {
@@ -76,7 +77,7 @@ class Search extends Component {
     const { disable, value, loading, fetched, name } = this.state;
     return (
       loading
-        ? <h2>Carregando...</h2>
+        ? <Loading />
         : (
           <div data-testid="page-search">
             <Header />

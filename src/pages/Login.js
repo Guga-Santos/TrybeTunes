@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { createUser } from '../services/userAPI';
 import Header from '../components/Header';
+import Loading from '../components/Loading';
 
 const MINLENGTH = 3;
 
@@ -42,7 +43,7 @@ class Login extends Component {
     render() {
       const { name, disable, loading, redirect } = this.state;
       return (
-        loading ? <h2>Carregando...</h2>
+        loading ? <Loading />
           : (
             <div data-testid="page-login">
               <Header />
