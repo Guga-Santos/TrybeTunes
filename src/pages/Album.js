@@ -6,7 +6,7 @@ class Album extends Component {
     return (
       <div data-testid="page-album">
         <Header />
-        <p>Album</p>
+        <p>Albums</p>
       </div>
     );
   }
