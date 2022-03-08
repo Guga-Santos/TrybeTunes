@@ -18,8 +18,9 @@ handleCheck = async (e) => {
     checked: e.target.checked,
     loading: true,
   });
-  const getMusic = await getMusics(e.target.trackId);
-  await addSong(getMusic);
+  const getMusic = await getMusics(e.target.id);
+  const addSongs = await addSong(getMusic);
+  console.log(addSongs);
 
   this.setState({
     loading: false,

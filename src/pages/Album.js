@@ -31,7 +31,6 @@ handleFavorites = async (id) => {
 
 renderAlbum = () => {
   const { musics, render } = this.state;
-  const { collectionName } = musics;
   return (
     render
       ? (
@@ -45,7 +44,7 @@ renderAlbum = () => {
             <h3 data-testid="artist-name">{musics[0].artistName}</h3>
             <h4 data-testid="album-name">
               {' '}
-              {collectionName}
+              { musics[0].collectionName }
               {' '}
             </h4>
           </div>
