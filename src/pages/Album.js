@@ -64,14 +64,14 @@ renderAlbum = () => {
                     <MusicCard
                       music={ obj }
                       key={ index }
-                      checked
+                      check
                     />
                   )
                   : (
                     <MusicCard
                       music={ obj }
                       key={ index }
-                      checked={ false }
+                      check={ false }
                     />
                   )
               );
