@@ -17,3 +17,65 @@ code {
   display: flex;
   justify-content: center;
 }
+
+.header-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1vh 10%;
+  background-color: #222222;
+  color: white;
+
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style-type: none;
+  background-color: #eeeeee;
+  height: 10vh;
+  margin: 0;
+}
+
+.links {
+  text-decoration: none;
+  font-size: 30px;
+}
+
+/* ------------------Album------------------ */
+
+.bigContainer {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.trackContainer {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.tracks {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.cardContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.trackImage {
+  width: 40%;
+}
+
+.trackName {
+  width: 30%;
+}

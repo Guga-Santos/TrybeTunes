@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
+import MusicCard from '../components/MusicCard';
+import { addSong } from '../services/favoriteSongsAPI';
+import Loading from '../components/Loading';
 
 class Album extends Component {
   constructor() {
@@ -19,58 +22,58 @@ componentDidMount = async () => {
     musics: getMusic,
     render: true,
   });
+  this.handleFavorites(id);
+}
+
+handleFavorites = async (id) => {
+  await addSong(id);
 }
 
 renderAlbum = () => {
-  const { musics } = this.state;
-  const { artistName, artworkUrl100, collectionName, trackName } = musics[0];
+  const { musics, render } = this.state;
+  const { collectionName } = musics;
   return (
-    <>
-      <div className="cardContainer">
-        <img src={ artworkUrl100 } alt={ trackName } />
-        <h3 data-testid="artist-name">{artistName}</h3>
-        <h4 data-testid="album-name">
-          {' '}
-          {collectionName}
-          {' '}
-        </h4>
-      </div>
-      <div className="trackContainer">
-        { musics.map((obj, index) => (
-          index === 0
-            ? null : (
-              <>
-                <p>
-                  { obj.trackName }
-                </p>
-                <audio
-                  data-testid="audio-component"
-                  src={ obj.previewUrl }
-                  key={ obj.artistId }
-                  controls
-                >
-                  <track kind="captions" />
-                  O seu navegador não suporta o elemento
-                  {' '}
-                  <code>audio</code>
-                  .
-                </audio>
+    render
+      ? (
+        <div className="bigContainer">
+          <div className="cardContainer">
+            <img
+              src={ musics[0].artworkUrl100 }
+              alt={ musics[0].trackName }
+              className="trackImage"
+            />
+            <h3 data-testid="artist-name">{musics[0].artistName}</h3>
+            <h4 data-testid="album-name">
+              {' '}
+              {collectionName}
+              {' '}
+            </h4>
+          </div>
+          <div className="trackContainer">
+            { musics.map((obj, index) => (
+              index === 0
+                ? null
+                : (
+                  <MusicCard
+                    music={ obj }
+                    key={ index }
+                  />
+                )))}
+          </div>
 
-              </>
-            )))}
-      </div>
-
-    </>
+        </div>
+      )
+      : null
   );
 }
 
 render() {
-  const { render } = this.state;
+  const { loading } = this.state;
   return (
     <div data-testid="page-album">
       <Header />
       <p>Album</p>
-      { render ? this.renderAlbum() : null }
+      { loading ? <Loading /> : this.renderAlbum() }
     </div>
   );
 }

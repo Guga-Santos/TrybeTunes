@@ -36,29 +36,46 @@ class Header extends Component {
         ? <Loading />
         : (
           <header data-testid="header-component">
-            <h2
-              data-testid="header-user-name"
-            >
-              {userName}
-            </h2>
-
-            <Link
-              to="/search"
-              data-testid="link-to-search"
-              className="nav-link"
-            />
-
-            <Link
-              to="/favorites"
-              data-testid="link-to-favorites"
-              className="nav-link"
-            />
-
-            <Link
-              to="/profile"
-              data-testid="link-to-profile"
-              className="nav-link"
-            />
+            <div className="header-header">
+              <p>TrybeTunes</p>
+              <h2
+                data-testid="header-user-name"
+              >
+                {userName}
+              </h2>
+            </div>
+            <ul className="header-nav">
+              <li>
+                <Link
+                  className="links"
+                  to="/search"
+                  data-testid="
+                link-to-search"
+                >
+                  Search
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="links"
+                  to="/favorites"
+                  data-testid="
+                link-to-favorites"
+                >
+                  Favorites
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="links"
+                  to="/profile"
+                  data-testid="
+                link-to-profile"
+                >
+                  Profile
+                </Link>
+              </li>
+            </ul>
 
           </header>
         )

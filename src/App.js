@@ -12,7 +12,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="Container">
-        <p>TrybeTunes</p>
         <BrowserRouter>
           <Switch>
             <Route path="/profile/edit">
