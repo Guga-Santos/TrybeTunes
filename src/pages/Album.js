@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
-import { addSong } from '../services/favoriteSongsAPI';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from '../components/Loading';
 
 class Album extends Component {
@@ -12,6 +12,7 @@ class Album extends Component {
     this.state = {
       musics: [],
       render: false,
+      saved: [],
     };
   }
 
@@ -22,15 +23,21 @@ componentDidMount = async () => {
     musics: getMusic,
     render: true,
   });
-  this.handleFavorites(id);
+
+  await getFavoriteSongs();
+  await this.SomeChecked();
 }
 
-handleFavorites = async (id) => {
-  await addSong(id);
+SomeChecked = async () => {
+  const get = await getFavoriteSongs();
+  const musicArray = get.map((obj) => obj.trackId);
+  this.setState({
+    saved: musicArray,
+  });
 }
 
 renderAlbum = () => {
-  const { musics, render } = this.state;
+  const { musics, render, saved } = this.state;
   return (
     render
       ? (
@@ -49,15 +56,26 @@ renderAlbum = () => {
             </h4>
           </div>
           <div className="trackContainer">
-            { musics.map((obj, index) => (
-              index === 0
-                ? null
-                : (
-                  <MusicCard
-                    music={ obj }
-                    key={ index }
-                  />
-                )))}
+            { musics.map((obj, index) => {
+              if (index === 0) return null;
+              return (
+                saved.some((ele) => ele === obj.trackId)
+                  ? (
+                    <MusicCard
+                      music={ obj }
+                      key={ index }
+                      checked
+                    />
+                  )
+                  : (
+                    <MusicCard
+                      music={ obj }
+                      key={ index }
+                      checked={ false }
+                    />
+                  )
+              );
+            })}
           </div>
 
         </div>
