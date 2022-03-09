@@ -10,14 +10,33 @@ class MusicCard extends Component {
 
     this.state = {
       loading: false,
-      checked: true,
+      checked: false,
+      saved: [],
     };
+  }
+
+  componentDidMount = async () => {
+    await this.SomeChecked();
+
+    const { music } = this.props;
+    const { saved } = this.state;
+    this.setState({
+      checked: saved.includes(music.trackId),
+    });
+  }
+
+  SomeChecked = async () => {
+    const get = await getFavoriteSongs();
+    const musicArray = get.map((obj) => obj.trackId);
+    this.setState({
+      saved: musicArray,
+    });
   }
 
 handleCheck = async (e) => {
   const { music } = this.props;
   this.setState({
-    checked: !e.target.checked,
+    checked: e.target.checked,
     loading: true,
   });
 
@@ -36,7 +55,7 @@ handleCheck = async (e) => {
 }
 
 render() {
-  const { music: { trackName, previewUrl, trackId }, check } = this.props;
+  const { music: { trackName, previewUrl, trackId } } = this.props;
   const { loading, checked } = this.state;
   return (
     loading ? <Loading /> : (
@@ -53,7 +72,8 @@ render() {
             type="checkbox"
             data-testid={ `checkbox-music-${trackId}` }
             id={ trackId }
-            checked={ check && checked }
+            value={ checked }
+            checked={ checked }
             onChange={ this.handleCheck }
           />
         </label>
@@ -70,5 +90,4 @@ MusicCard.propTypes = {
     previewUrl: PropTypes.string,
     trackId: PropTypes.number,
   }).isRequired,
-  check: PropTypes.bool.isRequired,
 };

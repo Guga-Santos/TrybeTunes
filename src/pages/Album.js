@@ -12,7 +12,6 @@ class Album extends Component {
     this.state = {
       musics: [],
       render: false,
-      saved: [],
     };
   }
 
@@ -25,19 +24,19 @@ componentDidMount = async () => {
   });
 
   await getFavoriteSongs();
-  await this.SomeChecked();
+  // await this.SomeChecked();
 }
 
-SomeChecked = async () => {
-  const get = await getFavoriteSongs();
-  const musicArray = get.map((obj) => obj.trackId);
-  this.setState({
-    saved: musicArray,
-  });
-}
+// SomeChecked = async () => {
+//   const get = await getFavoriteSongs();
+//   const musicArray = get.map((obj) => obj.trackId);
+//   this.setState({
+//     saved: musicArray,
+//   });
+// }
 
 renderAlbum = () => {
-  const { musics, render, saved } = this.state;
+  const { musics, render } = this.state;
   return (
     render
       ? (
@@ -59,21 +58,12 @@ renderAlbum = () => {
             { musics.map((obj, index) => {
               if (index === 0) return null;
               return (
-                saved.some((ele) => ele === obj.trackId)
-                  ? (
-                    <MusicCard
-                      music={ obj }
-                      key={ index }
-                      check
-                    />
-                  )
-                  : (
-                    <MusicCard
-                      music={ obj }
-                      key={ index }
-                      check={ false }
-                    />
-                  )
+                (
+                  <MusicCard
+                    music={ obj }
+                    key={ index }
+                  />
+                )
               );
             })}
           </div>
