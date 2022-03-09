@@ -67,6 +67,7 @@ render() {
           <code>audio</code>
         </audio>
         <label htmlFor={ trackId }>
+          Favorita
           <input
             key={ trackId }
             type="checkbox"
