@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { createUser } from '../services/userAPI';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
+import { createUser } from '../services/userAPI';
 
 const MINLENGTH = 3;
 
